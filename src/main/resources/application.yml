@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    username: root
+    password: root
+         # 192.168.10.11:33306
+    url: jdbc:mysql://114.55.106.21:3306/bill?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 指定 Druid 数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    # 数据源其他配置, DataSourceProperties中没有相关属性,默认无法绑定
+    initialSize: 8
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    filters: stat,wall,logback
+    maxPoolPreparedStatementPerConnectionSize: 25
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMilli s=500
+# Mybatis 配置文件版相关配置
+mybatis:
+  #核心配置文件路径
+  config-location: classpath:mybatis/mybatis-config.xml
+  #映射配置文件路径
+  mapper-locations: classpath:mybatis/mapper/*.xml
+logging:
+  level:
+    com.cuit.springboot.mapper: debug #打印sql语句
